@@ -41,7 +41,7 @@
     // "resolvePackageJsonImports": true,                /* package.jsonの"imports"フィールド（#で始まるインポート）を解決 */
     // "customConditions": [],                           /* exports/imports解決時の追加条件を指定（例: ["my-condition"]） */
     // "noUncheckedSideEffectImports": true,             /* 副作用のためだけのimport（例: import "./styles.css"）も型チェック対象にする */
-    // "resolveJsonModule": true,                        /* .jsonファイルをimportできるようにする */
+    "resolveJsonModule": true /* .jsonファイルをimportできるようにする */,
     // "allowArbitraryExtensions": true,                 /* 対応する宣言ファイルがあれば任意の拡張子のファイルをimport可能にする */
     // "noResolve": true,                                /* import/require/<reference>によるファイル追加を行わない（明示指定したファイルのみ処理） */
 
@@ -107,7 +107,7 @@
     /* ===== Completeness（型チェックの完全性） ===== */
     // "skipDefaultLibCheck": true,                      /* TypeScript同梱のデフォルト.d.tsの型チェックをスキップ */
     "skipLibCheck": true /* 全ての.d.tsファイルの型チェックをスキップ。コンパイル速度が大幅に向上するため通常はtrue推奨 */
-  }
-  // "include": [], // コンパイル対象とするファイルやディレクトリをglobパターンで指定（例: ["src/**/*"]）
-  // "exclude": ["node_modules"] // コンパイル対象から除外するファイルを 指定。includeで指定された範囲から除く
+  },
+  "include": ["src/**/*"], // コンパイル対象とするファイルやディレクトリをglobパターンで指定（例: ["src/**/*"]）
+  "exclude": ["node_modules", "dist"] // コンパイル対象から除外するファイルを 指定。includeで指定された範囲から除く
 }
