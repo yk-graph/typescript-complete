@@ -1,0 +1,29 @@
+{
+  "name": "food-score-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "concurrently npm:dev:*",
+    "dev:ts": "nodemon --exec tsx src/index.ts",
+    "dev:css": "npx @tailwindcss/cli -i ./src/styles.css -o ./dist/styles.css --watch",
+    "dev:html": "npx live-server . --port=5500",
+    "build": "concurrently npm:build:*",
+    "build:ts": "tsc",
+    "build:css": "npx @tailwindcss/cli -i ./src/styles.css -o ./dist/styles.css"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "@types/node": "^25.8.0",
+    "concurrently": "^9.2.1",
+    "live-server": "^1.2.2",
+    "tsx": "^4.22.0",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^4.3.0"
+  }
+}
