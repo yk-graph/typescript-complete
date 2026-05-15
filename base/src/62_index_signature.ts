@@ -5,11 +5,13 @@ interface Designer {
 
 const designer: Designer = {
   name: 'Alice',
-  tool: 'Figma', // インデックスシグネチャにより、name以外のプロパティも許可される
+  tool: 'Figma', // インデックスシグネチャにより、name以外のプロパティも許可される ※文字列型であれば何でもOKなので、今回のようにtoolというプロパティも追加できる
+  experience: '5 years', // さらに別のプロパティも追加可能 ※インデックスシグネチャがあると、name以外のプロパティも許可されるため、experienceというプロパティも追加できる
 }
 
 console.log(designer.name) // Alice
 console.log(designer.tool) // Figma
+console.log(designer.experience) // 5 years
 
 /* 解説
   インデックスシグネチャ:

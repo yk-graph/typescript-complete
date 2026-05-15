@@ -13,6 +13,6 @@
     "declaration": true,
     "sourceMap": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/4*_*.ts"], // 4 で始まり _ を含むファイルのみ対象
   "exclude": ["node_modules", "dist"]
 }
