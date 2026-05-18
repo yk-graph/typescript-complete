@@ -1,40 +1,28 @@
-// ベースとなる共通設定（フロントエンド・Node.js 共通）
 {
   "compilerOptions": {
     // --- 出力設定 ---
-    "target": "ES2022", // コンパイル後の JS バージョン。2026年時点では ES2022 が安定
+    "target": "ES2022", // コンパイル後の JS バージョン
     "outDir": "./dist", // コンパイル後のファイルの出力先
     "rootDir": "./src", // ソースファイルのルートディレクトリ
 
     // --- 型チェック ---
-    "strict": true, // 厳格な型チェックを有効化。2026年時点では必須レベル
-    // noImplicitAny / strictNullChecks など8つの strict 系オプションをまとめて有効にする
+    "strict": true, // 厳格な型チェックを有効化（noImplicitAny / strictNullChecks など8つをまとめて有効にする）
+    "noUncheckedIndexedAccess": true, // 配列アクセス時に undefined の可能性を考慮させる（例: arr[0] が string | undefined になる）
+    "noImplicitOverride": true, // override キーワードなしに親クラスのメソッドをオーバーライドするとエラーになる
 
     // --- モジュール解決 ---
-    // ⚠️ プロジェクトの種類によって異なる（下記参照）
-    "module": "ESNext",
-    "moduleResolution": "Bundler", // Vite / Next.js などバンドラーを使う場合（TypeScript 5.0 以降推奨）
-    // "module": "NodeNext",
-    // "moduleResolution": "NodeNext", // Node.js プロジェクトの場合
+    "module": "ES2022", // ブラウザ向けの ES モジュール形式を使用する（import/export 構文）
+    "moduleResolution": "Bundler", // バンドラー向けのモジュール解決（ブラウザアプリに適切）
 
     // --- 利便性 ---
     "esModuleInterop": true, // CommonJS モジュールを import 構文で扱えるようにする
-    "forceConsistentCasingInFileNames": true, // ファイル名の大文字小文字の一貫性を強制（Mac/Windows 間のバグ防止）
+    "forceConsistentCasingInFileNames": true, // ファイル名の大文字小文字の一貫性を強制（Mac と Windows 間のバグ防止）
     "skipLibCheck": true, // node_modules の型チェックをスキップしてビルドを高速化
     "resolveJsonModule": true, // JSON ファイルを import できるようにする
 
     // --- デバッグ ---
-    "sourceMap": true, // ソースマップを生成。ブラウザや VSCode でデバッグしやすくなる
-
-    // --- ライブラリ公開時に必要 ---
-    "declaration": true, // .d.ts ファイルを生成。ライブラリとして公開する場合に必要
-
-    // --- あると便利（任意） ---
-    "incremental": true, // 差分だけ再コンパイルしてビルドを高速化。大規模プロジェクト向け
-    "noUncheckedIndexedAccess": true, // 配列アクセス時に undefined の可能性を考慮させる
-    "noImplicitOverride": true // override キーワードなしにメソッドをオーバーライドするとエラーになる
+    "sourceMap": true // ソースマップを生成。エラー発生時に dist/ の JS ではなく src/ の TS の行番号で確認できる
   },
-
-  "include": ["src/**/*"], // コンパイル対象のファイル。src ディレクトリ以下の全てのファイルを対象にする
-  "exclude": ["node_modules", "dist"] // ビルド後のファイルを除外
+  "include": ["src/**/*"], // src ディレクトリ以下の全ファイルをコンパイル対象にする
+  "exclude": ["node_modules", "dist"] // 外部ライブラリとビルド済みファイルはコンパイル対象から除外する
 }

@@ -4,10 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="./dist/styles.css" rel="stylesheet" />
+    <script src="./dist/index.js" type="module" defer></script>
   </head>
+
   <body>
-    <div class="h-screen w-full bg-amber-700">
-      <h1 class="text-3xl font-bold underline"> Hello world! </h1>
+    <div class="min-h-screen h-auto w-full overflow-auto py-20 px-40 bg-stone-300 flex flex-col items-center justify-center gap-8">
+      <h1 class="text-3xl font-bold underline">Food Score</h1>
+
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h2 class="text-lg font-bold">Today's Score</h2>
+        <div class="flex items-center justify-center w-16 h-16 text-2xl border border-stone-700 rounded-full"> 4 </div>
+      </div>
+
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h2 class="text-lg font-bold">Good</h2>
+        <ul id="good-foods" class="flex flex-wrap gap-2"></ul>
+      </div>
+
+      <div class="flex flex-col items-center justify-center gap-2">
+        <h2 class="text-lg font-bold">Bad</h2>
+        <ul id="bad-foods" class="flex flex-wrap gap-2"></ul>
+      </div>
     </div>
   </body>
 </html>
