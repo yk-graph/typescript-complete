@@ -11,7 +11,8 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "declaration": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "experimentalDecorators": true
   },
   "include": ["src/4*_*.ts"], // 4 で始まり _ を含むファイルのみ対象
   "exclude": ["node_modules", "dist"]

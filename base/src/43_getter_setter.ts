@@ -42,4 +42,4 @@ teacher.subject = 'Science' // ✅ バリデーションを通って '_subject' 
 teacher.subject = '' // ❌ Error: 教科を空にすることはできません
 
 // private なので外から直接変更することはできない
-teacher._subject = 'Math' // ❌ private なのでアクセスできない
+// teacher._subject = 'Math' // ❌ private なのでアクセスできない

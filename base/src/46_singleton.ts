@@ -23,8 +23,8 @@ class AppConfig {
   }
 }
 
-new AppConfig() // ❌ private constructor なので外から new できない
-const config1 = AppConfig.getInstance()
+// new AppConfig() // ❌ private constructor なので外から new できない
+const config1 = AppConfig.getInstance() // ✅ getInstance() を通じてインスタンスを取得。初回は新しいインスタンスが作られる
 const config2 = AppConfig.getInstance()
 
 // 一見 2 つのインスタンスを作っているように見えるが、 getInstance() は既にインスタンスが存在する場合はそれを返すため、 config1 と config2 は同じインスタンスを参照している

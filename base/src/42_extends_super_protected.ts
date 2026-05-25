@@ -10,6 +10,10 @@ class Person {
     protected age: number, // 継承先からアクセスできる
     private salary: number, // 継承先からもアクセスできない
   ) {}
+
+  greeting(): void {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`)
+  }
 }
 
 /* private vs protected
@@ -20,13 +24,13 @@ class Person {
 class Teacher extends Person {
   showInfo(): void {
     console.log(this.age) // ✅ protected なので継承先からアクセスできる
-    console.log(this.salary) // ❌ private なので継承先からもアクセスできない
+    // console.log(this.salary) // ❌ private なので継承先からもアクセスできない
   }
 }
 
-const teacher = new Teacher('Charlie', 40, 300000, 'Math')
-teacher.age // ❌ クラスの外からはアクセスできない
-teacher.salary // ❌ クラスの外からはアクセスできない
+const teacher = new Teacher('Charlie', 40, 300000)
+// teacher.age // ❌ protected なのでクラスの外からはアクセスできない
+// teacher.salary // ❌ private なのでクラスの外からはアクセスできない
 teacher.showInfo() // ✅ 40
 
 /* super
@@ -51,8 +55,11 @@ teacher2.greeting() // ✅ 親クラスのメソッドをそのまま使える
 console.log(teacher2.subject) // ✅ 'Math'
 
 /* オーバーライド
-   - 親クラスのメソッドを継承先で上書きできる
-   - override キーワードをつけることで「意図的に上書きしている」ことを明示できる
+  - 親クラスのメソッドを継承先で上書きできる
+  - override キーワードをつけることで「意図的に上書きしている」ことを明示できる
+  - 安全性のメリット：
+    親クラスのメソッド名が変わった・削除された場合 override なしだと気づかず別メソッドとして残ってしまう（バグの温床）
+    override ありだと TypeScript　がコンパイルエラーで教えてくれる
 */
 
 class Student extends Person {

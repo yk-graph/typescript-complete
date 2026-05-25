@@ -24,7 +24,7 @@ function createDatabase<T extends string | number>(id: number, data: T) {
 }
 const db1 = createDatabase(1, 'Hello') // ✅ string は範囲内
 const db2 = createDatabase(2, 123) // ✅ number は範囲内
-// const db3 = createDatabase(3, true) // ❌ boolean は範囲外なのでエラー
+const db3 = createDatabase(3, true) // ❌ boolean は範囲外なのでエラー
 
 /* クラスでの活用
    - クラス名の直後に <T> を定義する
@@ -44,7 +44,7 @@ class LightDatabase<T extends string | number | boolean> {
 
 const stringDB = new LightDatabase<string>()
 stringDB.add('Hello') // ✅
-// stringDB.add(123)             // ❌ string 専用インスタンスなので弾かれる
+stringDB.add(123)             // ❌ string 専用インスタンスなので弾かれる
 stringDB.getAll()[0].toUpperCase() // ✅ string[] と確定しているので補完が効く
 
 const numberDB = new LightDatabase<number>()
@@ -64,4 +64,4 @@ interface Database<T extends string | number> {
 
 const strData: Database<string> = { id: 1, data: 'Hello' } // ✅
 const numData: Database<number> = { id: 2, data: 123 } // ✅
-// const boolData: Database<boolean> = { id: 3, data: true } // ❌ boolean は範囲外なのでエラー
+const boolData: Database<boolean> = { id: 3, data: true } // ❌ boolean は範囲外なのでエラー

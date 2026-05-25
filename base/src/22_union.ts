@@ -18,7 +18,7 @@ printValue('Hello') // Hello
 printValue(42) // 42
 
 // union型を使うと、複数の型を組み合わせて、より複雑な型を定義できる
-type User = {
+type UnionUser = {
   name: string
   age: number
 }
@@ -28,7 +28,7 @@ type Admin = {
   role: string
 }
 
-type Person = User | Admin
+type Person = UnionUser | Admin
 
 const person1: Person = {
   name: 'Alice',

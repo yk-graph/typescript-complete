@@ -13,9 +13,7 @@ class Person {
   }
 
   greeting(): void {
-    console.log(
-      `Hello, my name is ${this.name} and I am ${this.age} years old.`,
-    )
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`)
   }
 }
 
@@ -44,9 +42,7 @@ class Person2 {
 
   // 通常のメソッドではなく、アロー関数をプロパティとして定義する
   greeting = (): void => {
-    console.log(
-      `Hello, my name is ${this.name} and I am ${this.age} years old.`,
-    )
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`)
   }
 }
 
@@ -72,9 +68,7 @@ class Person3 {
   }
 
   greeting(this: Person3): void {
-    console.log(
-      `Hello, my name is ${this.name} and I am ${this.age} years old.`,
-    )
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`)
   }
 }
 
@@ -92,7 +86,7 @@ anotherCharlie.greeting() // ✅ Hello, my name is Charlie and I am 40 years old
 const invalidPerson = {
   greeting: charlie.greeting,
 }
-invalidPerson.greeting() // ❌ name と age がないので Person3 の条件を満たさずエラー
+// invalidPerson.greeting() // ❌ name と age がないので Person3 の条件を満たさずエラー
 
 /* どちらを使うべきか
    - React などのコンポーネントやコールバックで this を使う → アロー関数（対策A）が一般的

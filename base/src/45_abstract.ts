@@ -51,18 +51,15 @@ class SlackNotification extends Notification {
   }
 }
 
-const email = new EmailNotification(
-  '本日のミーティングは15時です',
-  'alice@example.com',
-)
+const email = new EmailNotification('本日のミーティングは15時です', 'alice@example.com')
 const slack = new SlackNotification('本日のミーティングは15時です', 'general')
 
 email.send() // ✅ 📧 alice@example.com にメールを送信しました: 本日のミーティングは15時です
 slack.send() // ✅ 💬 #general に Slack を送信しました: 本日のミーティングは15時です
 
-new Notification() // ❌ 抽象クラスは直接インスタンス化できない
-email.message // ❌ protected なプロパティにはクラス外からアクセスできない
-slack.message // ❌ protected なプロパティにはクラス外からアクセスできない
+// new Notification() // ❌ 抽象クラスは直接インスタンス化できない
+// email.message // ❌ protected なプロパティにはクラス外からアクセスできない
+// slack.message // ❌ protected なプロパティにはクラス外からアクセスできない
 
 /* どのように使うべきか
    - 複数のクラスに共通の処理がある → 親クラスにまとめる（通常の継承でも可）

@@ -1,24 +1,24 @@
 // ===== typeof: 値から型を取り出す =====
-const user = { id: 1, name: 'Alice', age: 30 }
+const person = { id: 1, name: 'Alice', age: 30 }
 
-type User = typeof user
+type Person = typeof person
 // → { id: number; name: string; age: number }
 
 // 使いどころ: 型を別途定義しなくても、値から型を作れる
-function greet(u: typeof user) {
-  console.log(u.name)
+function greet(p: typeof person) {
+  console.log(p.name)
 }
 
 // ===== keyof: 型のキーをユニオン型で取り出す =====
-type UserKeys = keyof User
+type PersonKeys = keyof Person
 // → "id" | "name" | "age"
 
 // 使いどころ: 「このオブジェクトのキーだけ受け付ける」関数
-function getProperty(obj: User, key: keyof User) {
+function getProperty(obj: Person, key: keyof Person) {
   return obj[key]
 }
-getProperty(user, 'name') // ✅
-// getProperty(user, "email") // ❌ キーが存在しない
+getProperty(person, 'name') // ✅
+getProperty(person, "email") // ❌ キーが存在しない
 
 // ===== keyof typeof: 値のキーをユニオン型で取り出す =====
 // typeof で型を取り出し → keyof でキーを取り出す
@@ -42,7 +42,7 @@ function getColor(key: ColorKey) {
   return COLORS[key]
 }
 getColor('red') // ✅ "#ff0000"
-// getColor("yellow") // ❌
+getColor("yellow") // ❌
 
 // ===== 実践: 定数からキーと値の型を同時に作る =====
 const STATUS = {
@@ -65,6 +65,6 @@ type StatusValue = (typeof STATUS)[keyof typeof STATUS]
 
 /* 結論
   typeof         → 値から型を生成。型の再定義を省ける
-  keyof          → 型のキーをユニオン型に。「このキーだけ受け付ける」関数に使う
-  keyof typeof   → 値のキーをユニオン型に。as const との組み合わせが定番
+  keyof          → 型のキーをユニオン型に 「このキーだけ受け付ける」 関数に使う
+  keyof typeof   → 値のキーをユニオン型に as const との組み合わせが定番
 */

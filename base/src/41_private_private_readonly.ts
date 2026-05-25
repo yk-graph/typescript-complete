@@ -37,7 +37,7 @@ const account = new BankAccount('Alice', 1000, '普通預金')
   間違って上書きするコードを書いてしまったときにコンパイルエラーで気づける
 */
 console.log(account.owner) // ✅ 'Alice'
-account.owner = 'Bob' // ❌ readonly なので変更できない
+// account.owner = 'Bob' // ❌ readonly なので変更できない
 
 account.accountType = '定期預金' // ✅ public なので変更できる
 
@@ -47,4 +47,4 @@ account.accountType = '定期預金' // ✅ public なので変更できる
 */
 account.deposit(500) // ✅ 500円入金しました。残高: 1500円
 account.withdraw(2000) // ❌ 残高が不足しています
-account.balance = 10000000 // ❌ private なので外から直接変更できない
+// account.balance = 10000000 // ❌ private なので外から直接変更できない

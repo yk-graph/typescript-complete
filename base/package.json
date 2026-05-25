@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "node-ts": "^8.0.12"
+  },
+  "devDependencies": {
+    "tsx": "^4.22.3"
+  }
+}

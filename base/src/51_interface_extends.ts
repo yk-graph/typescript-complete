@@ -42,9 +42,7 @@ class Person implements Human {
   ) {}
 
   greet(message: string): void {
-    console.log(
-      `${message}, my name is ${this.name} and I am ${this.age} years old.`,
-    )
+    console.log(`${message}, my name is ${this.name} and I am ${this.age} years old.`)
   }
 }
 
