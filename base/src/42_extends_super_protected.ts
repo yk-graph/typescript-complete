@@ -7,8 +7,8 @@
 class Person {
   constructor(
     public name: string,
-    protected age: number, // 継承先からアクセスできる
-    private salary: number, // 継承先からもアクセスできない
+    protected age: number, // 継承先クラスの内部からはアクセスできる（外からは不可）
+    private salary: number, // 継承先クラスからもアクセスできない（完全に非公開）
   ) {}
 
   greeting(): void {
@@ -16,11 +16,18 @@ class Person {
   }
 }
 
-/* private vs protected
-   - private  : クラスの内側からのみアクセスできる。継承先からもアクセスできない
-   - protected: クラスの外からはアクセスできないが、継承先からはアクセスできる
+/* private vs protected アクセス修飾子まとめ
+   ┌─────────────┬──────────────┬──────────────┬──────────────┐
+   │             │ クラス内部      │ 継承先クラス   │ クラスの外     │
+   ├─────────────┼──────────────┼──────────────┼──────────────┤
+   │ public      │      ✅      │      ✅      │      ✅      │
+   │ protected   │      ✅      │      ✅      │      ❌      │
+   │ private     │      ✅      │      ❌      │      ❌      │
+   └─────────────┴──────────────┴──────────────┴──────────────┘
 */
 
+// 【super が不要なケース】子クラスで新しいプロパティを追加しない場合
+// → constructor を書かなくてよいので super も不要（親の constructor が自動で使われる）
 class Teacher extends Person {
   showInfo(): void {
     console.log(this.age) // ✅ protected なので継承先からアクセスできる
@@ -28,25 +35,31 @@ class Teacher extends Person {
   }
 }
 
-const teacher = new Teacher('Charlie', 40, 300000)
-// teacher.age // ❌ protected なのでクラスの外からはアクセスできない
+const teacher = new Teacher('Charlie', 40, 300000) // 引数は親の constructor と同じ
+// teacher.age    // ❌ protected なのでクラスの外からはアクセスできない
 // teacher.salary // ❌ private なのでクラスの外からはアクセスできない
 teacher.showInfo() // ✅ 40
 
-/* super
-   - 継承先のコンストラクタで、親クラスのコンストラクタを呼び出すキーワード
-   - 継承先で constructor を定義する場合は必ず super() を呼び出す必要がある
-   - 親クラスが受け取る引数をそのまま super() に渡すことで、親クラスの初期化処理を実行できる
+/* super が必要なケース：子クラスで独自プロパティを追加したい場合
+   判断フロー:
+     子クラスで新しいプロパティを追加したい？
+       No → constructor を書かない → super も不要
+       Yes → constructor を書く   → super が必須
+
+   ルール: constructor を書いたら、必ず最初に super() で親を初期化する
+   理由 : 親の name / age / salary の初期化処理を呼ばないと
+          this.name 等が未定義のまま使われてバグになるため
 */
 
+// 【super が必要なケース】 subject という独自プロパティを追加したいので constructor を書く
 class Teacher2 extends Person {
   constructor(
     name: string,
     age: number,
     salary: number,
-    public subject: string,
+    public subject: string, // 子クラス独自のプロパティ（これを追加したいから constructor が必要）
   ) {
-    super(name, age, salary) // 親クラス（Person）のコンストラクタを呼び出す
+    super(name, age, salary) // 親クラス（Person）の constructor を呼び出して name/age/salary を初期化
   }
 }
 
@@ -54,12 +67,13 @@ const teacher2 = new Teacher2('Charlie', 40, 300000, 'Math')
 teacher2.greeting() // ✅ 親クラスのメソッドをそのまま使える
 console.log(teacher2.subject) // ✅ 'Math'
 
-/* オーバーライド
-  - 親クラスのメソッドを継承先で上書きできる
-  - override キーワードをつけることで「意図的に上書きしている」ことを明示できる
-  - 安全性のメリット：
-    親クラスのメソッド名が変わった・削除された場合 override なしだと気づかず別メソッドとして残ってしまう（バグの温床）
-    override ありだと TypeScript　がコンパイルエラーで教えてくれる
+/* オーバーライド（override）
+   - 親クラスのメソッドを継承先で上書きする仕組み
+   - override キーワードをつけることで「意図的に上書きしている」ことを明示できる
+   - 安全性のメリット：
+       親クラスのメソッド名が変わった・削除された場合
+       → override なし: 気づかず別メソッドとして残ってしまう（バグの温床）
+       → override あり: TypeScript がコンパイルエラーで教えてくれる
 */
 
 class Student extends Person {
